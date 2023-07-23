@@ -1,4 +1,5 @@
 import { useRoutes, BrowserRouter } from 'react-router-dom'
+import { ShoppingCardProvider } from '../../Context'
 import Home from '../Home'
 import MyAccount from '../MyAccount'
 import MyOrder from '../MyOrder'
@@ -22,15 +23,19 @@ const AppRoutes = () => {
   ])
   return routes
 }
+//se encapsula al appRoutes con browserRouter para que me muestre dependiendo de la ruta la pagina deseada
 const App = () => {
   return (
-    //se encapsula al appRoutes con browserRouter para que me muestre dependiendo de la ruta la pagina deseada
-    <BrowserRouter>
-      <Layout>
-        <AppRoutes />
-        <Navbar />
-      </Layout>
-    </BrowserRouter>
+    <ShoppingCardProvider>
+  
+      <BrowserRouter>
+        <Layout>
+          <AppRoutes />
+          <Navbar />
+        </Layout>
+      </BrowserRouter>
+    </ShoppingCardProvider>
+
   )
 }
 

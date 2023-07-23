@@ -53,7 +53,7 @@ const Navbar = () => {
                         className={({ isActive }) =>
                             isActive ? activeStyle : undefined
                         }>
-                        Toys
+                        Jewerely
                     </NavLink>
                 </li>
                 <li>
