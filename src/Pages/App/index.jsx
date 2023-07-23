@@ -6,6 +6,9 @@ import MyOrders from '../MyOrders'
 import NotFound from '../NotFound'
 import SignIn from '../SignIn'
 import './App.css'
+import Navbar from '../../Components/Navbar'
+import Layout from '../../Components/Layout'
+
 
 //se enlazan las rutas
 const AppRoutes = () => {
@@ -23,7 +26,10 @@ const App = () => {
   return (
     //se encapsula al appRoutes con browserRouter para que me muestre dependiendo de la ruta la pagina deseada
     <BrowserRouter>
-      <AppRoutes />
+      <Layout>
+        <AppRoutes />
+        <Navbar />
+      </Layout>
     </BrowserRouter>
   )
 }
