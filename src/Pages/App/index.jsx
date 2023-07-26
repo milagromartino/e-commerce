@@ -9,7 +9,7 @@ import SignIn from '../SignIn'
 import './App.css'
 import Navbar from '../../Components/Navbar'
 import Layout from '../../Components/Layout'
-
+import CheckoutSideMenu from '../../Components/CheckoutSideMenu'
 
 //se enlazan las rutas
 const AppRoutes = () => {
@@ -27,11 +27,11 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <ShoppingCardProvider>
-  
       <BrowserRouter>
         <Layout>
           <AppRoutes />
           <Navbar />
+          <CheckoutSideMenu />
         </Layout>
       </BrowserRouter>
     </ShoppingCardProvider>
