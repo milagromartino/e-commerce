@@ -2,6 +2,7 @@ import { ShoppingCardContext } from '../../Context'
 import './style.css'
 import { useContext } from 'react'
 import OrderCard from '../../Components/OrderCard'
+import { totalPrice } from '../../Utils'
 
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCardContext)
@@ -28,16 +29,21 @@ const CheckoutSideMenu = () => {
           context.cartProducts.map(product => (
             <OrderCard
               key={product.id}
-              id = {product.id}
+              id={product.id}
               title={product.title}
               imageURL={product.image}
               price={product.price}
-              handleDelete = {handleDelete}
+              handleDelete={handleDelete}
             />
           ))
         }
       </div>
-
+      <div className='px-6'>
+        <p className=''> 
+          <span className='font-semibold text-xl'>Total:</span>
+          <span className='font-bold text-2xl'> ${totalPrice(context.cartProducts)}</span>
+        </p>
+      </div>
     </aside>
   )
 }
