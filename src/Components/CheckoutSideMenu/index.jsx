@@ -6,6 +6,11 @@ import OrderCard from '../../Components/OrderCard'
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCardContext)
   //console.log('Cart en checkoutsidemenu ', context.cartProducts)
+  //si el id del producto es igual, no me retorna nada. Necesito que me devuelva diferente.
+  const handleDelete = (id) => {
+    const filteredProducts = context.cartProducts.filter(product => product.id != id)
+    context.setCartProducts(filteredProducts)
+  }
   return (
     <aside
       className={`${context.isCheckoutSideMenuOpen ? 'flex' : 'hidden'} checkout-side-menu flex-col fixed right-0  border border-black rounded-lg bg-white`}
@@ -23,9 +28,11 @@ const CheckoutSideMenu = () => {
           context.cartProducts.map(product => (
             <OrderCard
               key={product.id}
+              id = {product.id}
               title={product.title}
               imageURL={product.image}
               price={product.price}
+              handleDelete = {handleDelete}
             />
           ))
         }
