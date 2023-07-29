@@ -17,7 +17,7 @@ export const ShoppingCardProvider = ({ children }) => {
     //To add cart products 
     const [cartProducts, setCartProducts] = useState([])
     useEffect(() => {
-       // console.log('Se han actualizado los productos: ', cartProducts)
+        // console.log('Se han actualizado los productos: ', cartProducts)
     }, [cartProducts])
 
     //Checkout side menu
@@ -28,6 +28,10 @@ export const ShoppingCardProvider = ({ children }) => {
     //Add notification
     const [showNotification, setShowNotification] = useState(true);
     const [notificationMessage, setNotificationMessage] = useState();
+
+    // Shopping Cart - My orders
+    const [order, setOrder] = useState([])
+
     return (
         //se le pasa tanto el valor a leer, como el valor a modificar (setCount)
         <ShoppingCardContext.Provider value={{
@@ -47,7 +51,9 @@ export const ShoppingCardProvider = ({ children }) => {
             showNotification,
             setShowNotification,
             notificationMessage,
-            setNotificationMessage
+            setNotificationMessage,
+            order,
+            setOrder
         }}>
             {children}
         </ShoppingCardContext.Provider>
