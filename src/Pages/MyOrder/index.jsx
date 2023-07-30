@@ -7,6 +7,10 @@ import { Link } from 'react-router-dom'
 
 function MyOrder() {
   const context = useContext(ShoppingCardContext)
+  const currentPath = window.location.pathname
+  let index = currentPath.substring(currentPath.lastIndexOf('/') + 1)
+  //harà que se tome un numero, el id del ultimo pedido
+  if (index === 'last') index = context.order?.length-1
   return (
     <Layout >
       <div className='flex w-80 items-center relative justify-center'>
@@ -19,7 +23,7 @@ function MyOrder() {
       </div>
       <div className='flex flex-col w-80 py-6'>
         {
-          context.order?.slice(-1)[0].products.map(product => (
+          context.order?.[index]?.products.map(product => (
             <OrderCard
               key={product.id}
               id={product.id}

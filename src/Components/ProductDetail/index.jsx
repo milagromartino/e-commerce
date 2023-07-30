@@ -4,7 +4,7 @@ import { useContext } from 'react'
 
 const ProductDetail = () => {
   const context = useContext(ShoppingCardContext)
-  console.log(context.productToShow)
+  //console.log(context.productToShow)
   /*json que devuelve
   data:  
   category: "men's clothing" 
