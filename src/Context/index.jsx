@@ -20,6 +20,7 @@ export const ShoppingCardProvider = ({ children }) => {
         // console.log('Se han actualizado los productos: ', cartProducts)
     }, [cartProducts])
 
+
     //Checkout side menu
     const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(false)
     const openCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(true)
@@ -32,6 +33,25 @@ export const ShoppingCardProvider = ({ children }) => {
     // Shopping Cart - My orders
     const [order, setOrder] = useState([])
 
+    // Get products
+    const [items, setItems] = useState(null)
+    useEffect(() => {
+        fetch('https://fakestoreapi.com/products')
+            .then(response => response.json())
+            .then(data => setItems(data))
+    }, [])
+
+
+    // Get products by SearchTitleBar
+    const [searchTitleBar, setSearchTitleBar] = useState("")
+    const [filteredItems, setFilteredItems] = useState(null)
+
+    const filteredItemsByTitle = (items, searchTitleBar) => {
+        return items?.filter(item => item.title.toLowerCase().includes(searchTitleBar.toLowerCase()))
+    }
+    useEffect(() => {
+        if (searchTitleBar) setFilteredItems(filteredItemsByTitle(items, searchTitleBar))
+    }, [items,searchTitleBar])
     return (
         //se le pasa tanto el valor a leer, como el valor a modificar (setCount)
         <ShoppingCardContext.Provider value={{
@@ -53,7 +73,13 @@ export const ShoppingCardProvider = ({ children }) => {
             notificationMessage,
             setNotificationMessage,
             order,
-            setOrder
+            setOrder,
+            items,
+            setItems,
+            searchTitleBar,
+            setSearchTitleBar,
+            filteredItems,
+            setFilteredItems
         }}>
             {children}
         </ShoppingCardContext.Provider>
