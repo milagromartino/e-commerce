@@ -20,7 +20,7 @@ Ecomify es una aplicación de comercio electrónico construida con React, Vite y
 - Se aprendió a trabajar con componentes de React, y cómo estos pueden ser reutilizados en diferentes partes de la aplicación.
 - Se aprendió a trabajar con APIs externas para obtener datos de productos y pedidos. (En este caso, utilicé (https://fakestoreapi.com/)
 - Se aprendió a implementar funcionalidades como la búsqueda de productos, el carrito de compras y la visualización del historial de pedidos.
-- 
+  
 ## Contacto
 
 Milagro Martino - https://www.linkedin.com/in/milagromartino/
