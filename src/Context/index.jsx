@@ -20,7 +20,6 @@ export const ShoppingCardProvider = ({ children }) => {
         // console.log('Se han actualizado los productos: ', cartProducts)
     }, [cartProducts])
 
-
     //Checkout side menu
     const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(false)
     const openCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(true)
@@ -41,17 +40,42 @@ export const ShoppingCardProvider = ({ children }) => {
             .then(data => setItems(data))
     }, [])
 
-
     // Get products by SearchTitleBar
     const [searchTitleBar, setSearchTitleBar] = useState("")
     const [filteredItems, setFilteredItems] = useState(null)
-
     const filteredItemsByTitle = (items, searchTitleBar) => {
         return items?.filter(item => item.title.toLowerCase().includes(searchTitleBar.toLowerCase()))
     }
+    //Get products by categories 
+    const [searchByCategory, setSearchByCategory] = useState(null)
+    const filteredItemsByCategory = (items, searchByCategory) => {
+        console.log('items', items)
+        return items?.filter(item => item.category.toLowerCase().includes(searchByCategory.toLowerCase()))
+
+    }
+    //it'll filtered depending on the category or title. Ex: tenemos titulo, pero no categoria y viceversa
+    const filterBy = (searchType) => {
+        if (searchType === 'BY_TITLE') {
+            return filteredItemsByTitle(items, searchTitleBar)
+        }
+        if (searchType === 'BY_CATEGORY') {
+            return filteredItemsByCategory(items, searchByCategory)
+        }
+        if (searchType === 'BY_TITLE_AND_CATEGORY') {
+            return filteredItemsByCategory(items, searchByCategory).filter(item => item.title.toLowerCase().includes(searchTitleBar.toLowerCase()))
+        }
+        if (!searchType ) {
+            return items
+        }
+    }
     useEffect(() => {
-        if (searchTitleBar) setFilteredItems(filteredItemsByTitle(items, searchTitleBar))
-    }, [items,searchTitleBar])
+        if (searchTitleBar && searchByCategory) setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, searchByCategory, searchTitleBar))
+        if (searchTitleBar && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, searchTitleBar, searchByCategory))
+        if (!searchTitleBar && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, searchByCategory, searchTitleBar))
+        if (!searchTitleBar && !searchByCategory) setFilteredItems(filterBy(null, items, searchByCategory, searchTitleBar))
+    }, [items, searchTitleBar, searchByCategory])
+
+    console.log('filteredItems', filteredItems)
     return (
         //se le pasa tanto el valor a leer, como el valor a modificar (setCount)
         <ShoppingCardContext.Provider value={{
@@ -79,7 +103,9 @@ export const ShoppingCardProvider = ({ children }) => {
             searchTitleBar,
             setSearchTitleBar,
             filteredItems,
-            setFilteredItems
+            setFilteredItems,
+            setSearchByCategory,
+            searchByCategory
         }}>
             {children}
         </ShoppingCardContext.Provider>

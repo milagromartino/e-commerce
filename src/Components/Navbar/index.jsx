@@ -29,16 +29,28 @@ const Navbar = () => {
                 </li>
                 <li>
                     <NavLink
-                        to='/clothes'
+                        to="/men's clothing"
+                        onClick={() => context.setSearchByCategory("men's clothing")}
                         className={({ isActive }) =>
                             isActive ? activeStyle : undefined
                         }>
-                        Clothes
+                        Men's Clothing
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
+                        to="/women's clothing"
+                        onClick={() => context.setSearchByCategory("women's clothing")}
+                        className={({ isActive }) =>
+                            isActive ? activeStyle : undefined
+                        }>
+                        Women's Clothing
                     </NavLink>
                 </li>
                 <li>
                     <NavLink
                         to='/electronics'
+                        onClick={() => context.setSearchByCategory('electronics')}
                         className={({ isActive }) =>
                             isActive ? activeStyle : undefined
                         }>
@@ -47,29 +59,12 @@ const Navbar = () => {
                 </li>
                 <li>
                     <NavLink
-                        to='/furnitures'
-                        className={({ isActive }) =>
-                            isActive ? activeStyle : undefined
-                        }>
-                        Furnitures
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to='/toys'
+                        to='/jewerely'
+                        onClick={() => context.setSearchByCategory('jewelery')}
                         className={({ isActive }) =>
                             isActive ? activeStyle : undefined
                         }>
                         Jewerely
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to='/others'
-                        className={({ isActive }) =>
-                            isActive ? activeStyle : undefined
-                        }>
-                        Others
                     </NavLink>
                 </li>
             </ul>
