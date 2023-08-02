@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { ShoppingCardContext } from '../../Context'
 
-const Navbar = () => {
+const Navbar = ({ email }) => {
     const context = useContext(ShoppingCardContext)
     const activeStyle = 'underline underline-offset-4'
     return (
@@ -70,7 +70,7 @@ const Navbar = () => {
             </ul>
             <ul className='flex items-center gap-3'>
                 <li className='text-black/60'>
-                    me@example.com
+                    {email}
                 </li>
                 <li>
                     <NavLink

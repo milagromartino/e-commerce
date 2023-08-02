@@ -49,7 +49,6 @@ export const ShoppingCardProvider = ({ children }) => {
     //Get products by categories 
     const [searchByCategory, setSearchByCategory] = useState(null)
     const filteredItemsByCategory = (items, searchByCategory) => {
-        console.log('items', items)
         return items?.filter(item => item.category.toLowerCase().includes(searchByCategory.toLowerCase()))
 
     }
@@ -75,7 +74,6 @@ export const ShoppingCardProvider = ({ children }) => {
         if (!searchTitleBar && !searchByCategory) setFilteredItems(filterBy(null, items, searchByCategory, searchTitleBar))
     }, [items, searchTitleBar, searchByCategory])
 
-    console.log('filteredItems', filteredItems)
     return (
         //se le pasa tanto el valor a leer, como el valor a modificar (setCount)
         <ShoppingCardContext.Provider value={{

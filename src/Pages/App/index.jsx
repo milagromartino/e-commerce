@@ -36,7 +36,7 @@ const App = () => {
       <BrowserRouter>
         <Layout>
           <AppRoutes />
-          <Navbar />
+          <Navbar/>
           <CheckoutSideMenu />
         </Layout>
       </BrowserRouter>

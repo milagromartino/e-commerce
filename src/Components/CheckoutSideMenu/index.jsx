@@ -33,6 +33,8 @@ const CheckoutSideMenu = () => {
     context.setCartProducts([])
     context.setCount(0)
     context.closeCheckoutSideMenu()
+    //hara que la barra de busqueda quede vacia luego de hacer checkout
+    context.setSearchTitleBar(null)
   }
 
   return (
