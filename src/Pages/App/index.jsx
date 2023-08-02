@@ -10,6 +10,7 @@ import './App.css'
 import Navbar from '../../Components/Navbar'
 import Layout from '../../Components/Layout'
 import CheckoutSideMenu from '../../Components/CheckoutSideMenu'
+import SignUp from '../SignUp'
 
 //se enlazan las rutas
 const AppRoutes = () => {
@@ -25,6 +26,7 @@ const AppRoutes = () => {
     { path: '/my-account', element: <MyAccount /> },
     { path: '/my-order', element: <MyOrder /> },
     { path: '/sign-in', element: <SignIn /> },
+    { path: '/sign-up', element: <SignUp /> },
     { path: '/*', element: <NotFound /> }
   ])
   return routes

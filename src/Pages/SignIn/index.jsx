@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../../Components/Layout';
 
 function SignIn() {
-  const [email, setEmail] = useState('');
   return (
     <Layout>
       <form className="bg-white p-6 rounded shadow-md border border-gray-300">
@@ -16,8 +14,6 @@ function SignIn() {
             type="email"
             id="email"
             className="w-full border-gray-300 rounded-md p-2"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="mb-4">
@@ -30,13 +26,14 @@ function SignIn() {
             className="w-full border-gray-300 rounded-md p-2"
           />
         </div>
-        <Link to="/" className="text-blue-500 hover:underline">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-          >
-            Sign In
-          </button>
+        <Link to='/'>
+        
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+        >
+          Sign In
+        </button>
         </Link>
         <p className="mt-4 text-sm">
           Don't have an account?{' '}
@@ -49,4 +46,4 @@ function SignIn() {
   );
 }
 
-export default SignIn
+export default SignIn;

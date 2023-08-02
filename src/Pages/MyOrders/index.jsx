@@ -7,6 +7,15 @@ import { ShoppingCardContext } from '../../Context'
 
 function MyOrders() {
   const context = useContext(ShoppingCardContext)
+  if (context.order.length === 0) {
+    return (
+      <Layout >
+        <div className='flex w-80 items-center relative justify-center mb-4'>
+        </div>
+        <p className='text-center font-bold text-xl'>This is empty... ¡Let's shop!</p>
+      </Layout>
+    )
+  }
   return (
     <Layout >
       <div className='flex w-80 items-center relative justify-center mb-4'>
