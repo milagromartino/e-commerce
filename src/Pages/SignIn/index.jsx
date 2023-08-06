@@ -1,47 +1,61 @@
 import { Link } from 'react-router-dom';
 import Layout from '../../Components/Layout';
+import { useContext, useState } from 'react';
+import { ShoppingCardContext } from '../../Context';
 
 function SignIn() {
+  const context = useContext(ShoppingCardContext)
+  const [view, setView] = useState('user-info')
+  //Account 
+  const account = localStorage.getItem('account')
+  const parsedAccount = JSON.parse(account)
+  const noAccountInLocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
+  const noAccountInLocalState = context.account ? Object.keys(context.account).length === 0 : true
+  const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState
+
+  const renderLogin = () => {
+    return (
+      <div className='flex-flex-col w-80'>
+        <div className='flex flex-col w-80'>
+          <p>
+            <span className='font-light text-sm'>Email</span>
+            <span>{parsedAccount?.email}</span>
+          </p>
+          <p>
+            <span className='font-light text-sm'>Password</span>
+            <span>{parsedAccount?.password}</span>
+          </p>
+          <Link
+            to="/"
+          >
+            <button className='bg-[#c9d6df] disabled:bg-black/40 text-white w-full rounded-lg py-3 mt-4 mb-2' disabled={!hasUserAnAccount}>
+              Log In
+            </button>
+          </Link>
+        </div>
+        <div className='text-center'>
+          <a href="/" className='font-light text-xs underline underline-offset-4'>Forgot my password</a>
+        </div>
+        <Link to="/sign-up" className='w-full'>
+          <button onClick={() => setView('create-user-info')}
+
+            className='bg-[#c9d6df] border border-black disabled:text-black/40 disabled:bg-black/40 w-full rounded-lg py-3 mt-6 mb-2' disabled={hasUserAnAccount}>
+            Sign Up
+          </button>
+        </Link>
+      </div>
+    )
+  }
+  const renderCreateUserInfo = () => {
+    //pendiente
+  }
+  const renderView = () => view === 'create-user-info' ? renderCreateUserInfo() : renderLogin()
   return (
     <Layout>
-      <form className="bg-white p-6 rounded shadow-md border border-gray-300">
-        <h2 className="text-2xl font-black mb-4">Sign In</h2>
-        <div className="mb-4">
-          <label htmlFor="email" className="block font-medium mb-2">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="w-full border-gray-300 rounded-md p-2"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block font-medium mb-2">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            className="w-full border-gray-300 rounded-md p-2"
-          />
-        </div>
-        <Link to='/'>
-        
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-        >
-          Sign In
-        </button>
-        </Link>
-        <p className="mt-4 text-sm">
-          Don't have an account?{' '}
-          <Link to="/sign-up" className="text-blue-500 hover:underline">
-            Sign up
-          </Link>
-        </p>
-      </form>
+      <h1 className='font-bold text-xl text-center mb-6 w-80'>
+        ¡Welcome!
+      </h1>
+      {renderView()}
     </Layout>
   );
 }

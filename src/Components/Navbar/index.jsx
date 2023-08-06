@@ -1,10 +1,79 @@
 import { useContext } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { ShoppingCardContext } from '../../Context'
 
 const Navbar = () => {
     const context = useContext(ShoppingCardContext)
     const activeStyle = 'underline underline-offset-4'
+    //Sign Out
+    const signOut = localStorage.getItem('sign-out')
+    const parsedSignOut = JSON.parse(signOut)
+    const isUserSignOut = context.signOut || parsedSignOut
+
+    const handleSignOut = () => {
+        const stringifiedSignOut = JSON.stringify(true)
+        localStorage.setItem('sign-out', stringifiedSignOut)
+        context.setSignOut(true)
+    }
+
+    const renderView = () => {
+        if (isUserSignOut) {
+            return (
+                <li>
+                    <NavLink
+                        to='/sign-in'
+                        className={({ isActive }) =>
+                            isActive ? activeStyle : undefined
+                        }
+                        onClick={() => handleSignOut()}>
+                        Sign Out
+                    </NavLink>
+                </li>
+            )
+        } else {
+            return (
+                <>
+                    <ul className='flex items-center gap-3'>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3 h-3">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+                        </svg>
+                        <a href='https://www.linkedin.com/in/milagromartino/' target='_blank' rel='noopener noreferrer' className=' justify-between items-center flex'>
+                            <li className='text-black/60  '>
+                                milagromartino
+                            </li>
+                        </a>
+                        <li>
+                            <NavLink
+                                to='/my-orders'
+                                className={({ isActive }) =>
+                                    isActive ? activeStyle : undefined
+                                }>
+                                My orders
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to='/my-account'
+                                className={({ isActive }) =>
+                                    isActive ? activeStyle : undefined
+                                }>
+                                My account
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to='/sign-in'
+                                className={({ isActive }) => isActive ? activeStyle : undefined}
+                                onClick={() => handleSignOut()}>
+                                Sign out
+                            </NavLink>
+                        </li>
+                    </ul>
+                </>
+
+            )
+        }
+    }
     return (
         <nav className='flex justify-between items-center fixed top-0 z-10 w-full py-5 px-8 text-sm font-light bg-[#C9D6DF]'>
             <ul className='flex items-center gap-3'>
@@ -69,32 +138,7 @@ const Navbar = () => {
                 </li>
             </ul>
             <ul className='flex items-center gap-3'>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3 h-3">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
-                </svg>
-                <a href='https://www.linkedin.com/in/milagromartino/' target='_blank' rel='noopener noreferrer' className=' justify-between items-center flex'>
-                    <li className='text-black/60  '>
-                        milagromartino
-                    </li>
-                </a>
-                <li>
-                    <NavLink
-                        to='/my-orders'
-                        className={({ isActive }) =>
-                            isActive ? activeStyle : undefined
-                        }>
-                        My orders
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to='/sign-in'
-                        className={({ isActive }) =>
-                            isActive ? activeStyle : undefined
-                        }>
-                        Sign In
-                    </NavLink>
-                </li>
+                {renderView()}
                 <li className='flex items-center'>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
