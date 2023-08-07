@@ -7,12 +7,14 @@ export const initializeLocalStorage = () => {
     const signOutInLocalStorage = localStorage.getItem('sign-out')
     let parsedAccount
     let parsedSignOut
+
     if (!accountInLocalStorage) {
         localStorage.setItem('account', JSON.stringify({}))
         parsedAccount = {}
     } else {
         parsedAccount = JSON.parse(accountInLocalStorage)
     }
+
     if (!signOutInLocalStorage) {
         localStorage.setItem('sign-out', JSON.stringify(false))
         parsedSignOut = false
@@ -21,8 +23,12 @@ export const initializeLocalStorage = () => {
     }
 }
 
-
 export const ShoppingCardProvider = ({ children }) => {
+    //My account
+    const [account, setAccount] = useState({})
+    //Sign out
+    const [signOut, setSignOut] = useState(false)
+
     //Count items - Shopping Cart
     const [count, setCount] = useState(0)
 
@@ -93,12 +99,6 @@ export const ShoppingCardProvider = ({ children }) => {
         if (!searchTitleBar && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, searchByCategory, searchTitleBar))
         if (!searchTitleBar && !searchByCategory) setFilteredItems(filterBy(null, items, searchByCategory, searchTitleBar))
     }, [items, searchTitleBar, searchByCategory])
-
-    //My account
-    const [account, setAccount] = useState({})
-    //Sign out
-    const [signOut, setSignOut] = useState(false)
-
     return (
         //se le pasa tanto el valor a leer, como el valor a modificar (setCount)
         <ShoppingCardContext.Provider value={{

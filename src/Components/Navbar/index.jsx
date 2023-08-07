@@ -9,6 +9,12 @@ const Navbar = () => {
     const signOut = localStorage.getItem('sign-out')
     const parsedSignOut = JSON.parse(signOut)
     const isUserSignOut = context.signOut || parsedSignOut
+    //Account 
+    const account = localStorage.getItem('account')
+    const parsedAccount = JSON.parse(account)
+    const noAccountInLocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
+    const noAccountInLocalState = context.account ? Object.keys(context.account).length === 0 : true
+    const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState
 
     const handleSignOut = () => {
         const stringifiedSignOut = JSON.stringify(true)
@@ -17,31 +23,13 @@ const Navbar = () => {
     }
 
     const renderView = () => {
-        if (isUserSignOut) {
-            return (
-                <li>
-                    <NavLink
-                        to='/sign-in'
-                        className={({ isActive }) =>
-                            isActive ? activeStyle : undefined
-                        }
-                        onClick={() => handleSignOut()}>
-                        Sign Out
-                    </NavLink>
-                </li>
-            )
-        } else {
+        if (hasUserAnAccount && !isUserSignOut) {
             return (
                 <>
                     <ul className='flex items-center gap-3'>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3 h-3">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
-                        </svg>
-                        <a href='https://www.linkedin.com/in/milagromartino/' target='_blank' rel='noopener noreferrer' className=' justify-between items-center flex'>
-                            <li className='text-black/60  '>
-                                milagromartino
-                            </li>
-                        </a>
+                        <li className='text-black/60'>
+                            {parsedAccount?.email}
+                        </li>
                         <li>
                             <NavLink
                                 to='/my-orders'
@@ -70,7 +58,17 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </>
-
+            )
+        } else {
+            return (
+                <li>
+                    <NavLink
+                        to="/sign-in"
+                        className={({ isActive }) => isActive ? activeStyle : undefined}
+                        onClick={() => handleSignOut()}>
+                        Sign in
+                    </NavLink>
+                </li>
             )
         }
     }
@@ -79,7 +77,7 @@ const Navbar = () => {
             <ul className='flex items-center gap-3'>
                 <li className='font-semibold text-xl justify-between items-center flex'>
                     <NavLink
-                        to='/'>
+                        to={`${isUserSignOut ? '/sign-in' : '/'}`}>
                         Ecomify
                     </NavLink>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

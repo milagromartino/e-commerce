@@ -2,8 +2,6 @@ import Layout from '../../Components/Layout';
 import { Link } from 'react-router-dom';
 function SignUp() {
     return (
-
-
         <Layout>
             <form className="bg-white p-6 rounded shadow-md border border-gray-300">
                 <h2 className="text-2xl font-black mb-4">Sign Up</h2>
