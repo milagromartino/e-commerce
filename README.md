@@ -25,4 +25,8 @@ Ecomify es una aplicación de comercio electrónico construida con React, Vite y
 
 Milagro Martino - https://www.linkedin.com/in/milagromartino/
 
+## Updates
+[06-08-2023]
+Adicionalmente, se implementaron funcionalidades utilizando el almacenamiento local (local storage) para iniciar sesión. Se otorgan ciertos permisos según si el usuario tiene una cuenta o no, y permite editar los datos de la cuenta, como nombre, correo electrónico y contraseña.
+
 Enlace al proyecto: https://ecomify.netlify.app/
